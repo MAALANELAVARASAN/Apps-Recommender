@@ -111,5 +111,5 @@ Feel free to fork this project, create new features, and submit pull requests! �
 This project is **MIT Licensed**. Feel free to use and modify it as needed.
 
 ---
-📧 For any issues or suggestions, contact [your-email@example.com](mailto:maalanelavarasan8@gmail.com).
+📧 For any issues or suggestions, for further queries (mailto:maalanelavarasan8@gmail.com)]
 
