@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>App Recommender System</h1>
+
+        <label for="priority">Choose your priority:</label>
+        <select id="priority">
+            <option value="1">Rating</option>
+            <option value="2">Current Trend</option>
+            <option value="3">Performance</option>
+            <option value="4">Feedback Sentiment</option>
+            <option value="5">Security & Privacy</option>
+            <option value="6">Storage Size</option>
+            <option value="7">Free vs. Paid</option>
+        </select>
+        
+        <button onclick="getRecommendations()">Get Recommendations</button>
+        <button onclick="showFeedbackForm()">Give Feedback</button>
+
+        <div id="loading" style="display: none;">Loading recommendations...</div>
+
+        <h2>Recommended Apps:</h2>
+        <ul id="recommendations"></ul>
+    </div>
+
+    <!-- Feedback Form (Initially Hidden) -->
+    <div id="feedback-container" class="container" style="display: none;">
+        <h2>Submit Feedback</h2>
+        <textarea id="feedback" placeholder="Enter your feedback here..." rows="4"></textarea>
+        <button onclick="submitFeedback()">Submit</button>
+        <button onclick="hideFeedbackForm()">Cancel</button>
+    </div>
+
+    <script>
+        function getRecommendations() {
+            let priority = document.getElementById("priority").value;
+            let recommendations = document.getElementById("recommendations");
+            let loading = document.getElementById("loading");
+
+            recommendations.innerHTML = "";
+            loading.style.display = "block";
+
+            fetch("/recommend", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ priority: priority })
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = "none";
+
+                if (data.length === 0) {
+                    recommendations.innerHTML = "<li>No recommendations found.</li>";
+                    return;
+                }
+
+                const priorityLabels = {
+                    "1": "Rating",
+                    "2": "Current Trend",
+                    "3": "Performance",
+                    "4": "Sentiment",
+                    "5": "Security & Privacy"
+                };
+
+                let selectedLabel = priorityLabels[priority] || "Value";
+
+                data.forEach(app => {
+                    let attributeKey = Object.keys(app).find(key => key !== "app_name");
+                    let li = document.createElement("li");
+                    li.innerHTML = `<strong>${app.app_name}</strong> - ${selectedLabel}: ${app[attributeKey]}`;
+                    recommendations.appendChild(li);
+                });
+            })
+            .catch(error => {
+                loading.style.display = "none";
+                alert("Error fetching recommendations. Please try again.");
+            });
+        }
+
+        function showFeedbackForm() {
+            document.getElementById("feedback-container").style.display = "block";
+        }
+
+        function hideFeedbackForm() {
+            document.getElementById("feedback-container").style.display = "none";
+        }
+
+        function submitFeedback() {
+            let feedbackText = document.getElementById("feedback").value;
+            if (!feedbackText.trim()) {
+                alert("Please enter some feedback before submitting.");
+                return;
+            }
+
+            fetch("/submit_feedback", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ feedback: feedbackText })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Thank you for your feedback!");
+                document.getElementById("feedback").value = "";
+                hideFeedbackForm();
+            })
+            .catch(error => {
+                alert("Error submitting feedback. Please try again.");
+            });
+        }
+    </script>
+</body>
+</html>

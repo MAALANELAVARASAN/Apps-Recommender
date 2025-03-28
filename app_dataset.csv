@@ -1,0 +1,52 @@
+app_name,rating,feedback,suggestion,current_trend,performance,security_privacy,storage_size,free_vs_paid
+SecureVault,3.2,Could be more secure,More features needed,67,83,62,54,Free
+AdFreeMusic,4.3,Too many ads,Improve UI,86,61,91,366,Free
+UIPro,3.9,Needs improvement in UI,Reduce storage size,79,83,65,85,Paid
+UXMaster,3.8,Great user experience,Improve UI,61,62,68,274,Paid
+HelpDesk,4.2,Excellent customer support,Add offline mode,98,100,89,124,Free
+DarkModeApp,4.5,Takes up too much space,Add dark mode,73,100,55,384,Free
+SmoothRide,4.2,Great user experience,Improve UI,89,72,60,60,Paid
+PerfBoost,3.7,Needs improvement in UI,Optimize performance,61,100,93,206,Free
+SecurityPlus,4.3,Needs improvement in UI,Enhance security,95,84,63,25,Paid
+CloudSync,4.8,Takes up too much space,Improve customer support,99,53,58,288,Free
+ChatPro,4.1,Great user experience,Add dark mode,90,59,77,340,Paid
+FeatureLite,3.2,Lacks essential features,Add offline mode,63,64,77,156,Free
+UserFriendly,3.7,Great user experience,Improve customer support,64,72,71,228,Free
+FastEdit,4.9,Smooth performance,More features needed,71,75,87,72,Paid
+SecureConnect,4.7,Smooth performance,Enhance security,80,82,71,133,Free
+LiteMode,4.9,Lacks essential features,Add dark mode,97,64,51,364,Free
+BugFixer,4.3,Lacks essential features,Fix bugs,66,73,91,333,Paid
+ShieldApp,3.6,Could be more secure,More features needed,60,68,52,54,Paid
+AdBlocker,3.8,Too many ads,Reduce ads,66,93,94,13,Free
+OfflineHelper,3.9,Takes up too much space,Add offline mode,52,64,86,110,Free
+FixIt,3.4,Lacks essential features,Fix bugs,75,73,82,72,Free
+BugRemover,4.2,Very useful,Fix bugs,61,74,65,192,Paid
+SecurityX,3.5,Needs improvement in UI,Enhance security,90,97,95,339,Paid
+DarkVision,3.5,Crashes frequently,Add dark mode,89,59,94,448,Free
+TaskMaster,3.7,Great user experience,Fix bugs,74,88,81,393,Paid
+StorageOptimizer,4.1,Takes up too much space,Fix bugs,92,65,79,343,Free
+PerformanceGuru,3.2,Excellent customer support,Optimize performance,94,99,67,54,Free
+BugHunter,3.2,Lacks essential features,Fix bugs,90,83,55,389,Paid
+SupportEase,4.7,Could be more secure,Improve customer support,70,73,50,322,Paid
+StorageSaver,3.5,Crashes frequently,Reduce storage size,61,80,75,103,Paid
+UXBoost,4.3,Great user experience,Improve UI,53,97,99,460,Free
+FixMyApp,3.3,Very useful,Fix bugs,78,99,64,142,Free
+EnhanceUI,3.3,Lacks essential features,Improve UI,56,77,85,195,Free
+VisualUpgrade,4.1,Needs improvement in UI,Improve UI,79,84,66,75,Paid
+CrashHandler,4.4,Crashes frequently,Fix bugs,85,94,56,360,Free
+PerformanceX,4.6,Lacks essential features,Optimize performance,68,59,96,398,Paid
+SupportPlus,3.4,Crashes frequently,Improve customer support,62,59,51,476,Free
+AdGuardian,4.6,Too many ads,Enhance security,76,62,78,81,Paid
+FixSecure,3.6,Could be more secure,Fix bugs,56,68,91,77,Paid
+OptimizeIt,3.3,Very useful,Optimize performance,61,94,66,147,Free
+CustomerCare,4.7,Great user experience,Improve customer support,71,63,64,379,Paid
+StorageCut,4.1,Crashes frequently,Reduce storage size,77,81,90,127,Free
+DebugIt,4.1,Great user experience,Fix bugs,72,61,63,277,Paid
+OfflineMode,3.9,Smooth performance,Add offline mode,77,94,60,246,Paid
+AdRemover,3.8,Too many ads,Add offline mode,52,89,58,124,Free
+SafeApp,4.6,Needs improvement in UI,Enhance security,82,70,98,113,Free
+PerformanceBoost,3.6,Smooth performance,More features needed,98,62,88,411,Free
+UIFixer,3.2,Needs improvement in UI,Improve UI,78,56,55,339,Paid
+SecureDrive,3.9,Could be more secure,More features needed,94,87,83,200,Paid
+CrashFix,3.6,Too many ads,Fix bugs,58,100,91,106,Paid
+BugScanner,4.5,Needs improvement in UI,Enhance security,93,89,94,429,Paid

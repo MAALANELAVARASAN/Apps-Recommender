@@ -1,0 +1,91 @@
+from fastapi import FastAPI, HTTPException, Depends
+from pydantic import BaseModel
+from typing import List
+import datetime
+import psycopg2
+from psycopg2.extras import RealDictCursor
+import nltk
+from textblob import TextBlob
+
+# Initialize FastAPI app
+app = FastAPI()
+
+# Database connection
+DB_CONFIG = {
+    "dbname": "feedback_db",
+    "user": "postgres",
+    "password": "yourpassword",
+    "host": "localhost",
+    "port": "5432"
+}
+
+def get_db_connection():
+    return psycopg2.connect(**DB_CONFIG, cursor_factory=RealDictCursor)
+
+# Feedback model
+class Feedback(BaseModel):
+    user_id: int
+    app_id: int
+    feedback_text: str
+    issue_type: str  # "Bug", "Feature Request", "Performance"
+
+# Action model
+class ActionResponse(BaseModel):
+    id: int
+    app_id: int
+    description: str
+    priority_score: float
+    status: str
+
+# Submit feedback
+@app.post("/feedback/submit")
+def submit_feedback(feedback: Feedback):
+    sentiment_score = TextBlob(feedback.feedback_text).sentiment.polarity  # -1 to 1 scale
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO feedback (user_id, app_id, feedback_text, sentiment, issue_type, created_at)
+        VALUES (%s, %s, %s, %s, %s, %s)
+    """, (feedback.user_id, feedback.app_id, feedback.feedback_text, sentiment_score, feedback.issue_type, datetime.datetime.now()))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return {"message": "Feedback submitted successfully!"}
+
+# Analyze feedback
+@app.get("/feedback/analyze")
+def analyze_feedback():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT issue_type, COUNT(*) as count, AVG(sentiment) as avg_sentiment FROM feedback GROUP BY issue_type")
+    result = cur.fetchall()
+    cur.close()
+    conn.close()
+    return result
+
+# Recommend actions
+@app.get("/actions/recommend", response_model=List[ActionResponse])
+def recommend_actions():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT id, app_id, description, priority_score, status FROM actions
+        ORDER BY priority_score DESC LIMIT 5
+    """)
+    actions = cur.fetchall()
+    cur.close()
+    conn.close()
+    return actions
+
+# Update action status
+@app.patch("/actions/update/{id}")
+def update_action_status(id: int, status: str):
+    if status not in ["Pending", "In Progress", "Resolved"]:
+        raise HTTPException(status_code=400, detail="Invalid status")
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("UPDATE actions SET status = %s WHERE id = %s", (status, id))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return {"message": "Action status updated successfully!"}
